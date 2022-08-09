@@ -1,0 +1,51 @@
+zoroastrian_rum = {
+	icon = "noble_indian"
+	allow_convert = no
+	allow_normal_conversion = no
+	lock_level_when_selected = yes
+	legacy_equivalent = feudal_monarchy
+	potential = {
+		tag = RUM
+		religion = zoroastrian
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		governing_capacity = 250
+		unjustified_demands = -0.1
+		legitimacy = 0.5
+		max_absolutism = 5
+	}
+	custom_attributes = {
+		locked_government_type = yes
+	}
+
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		has_pashas = yes
+	}
+}
+
+christian_rum = {
+	icon = "ottoman_government"
+	allow_convert = no
+	allow_normal_conversion = no
+	lock_level_when_selected = yes
+	legacy_equivalent = feudal_monarchy
+	potential = {
+		tag = RUM
+		religion_group = christian
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		governing_capacity = 250
+		unjustified_demands = -0.1
+		legitimacy = 0.5
+		max_absolutism = 5
+	}
+	custom_attributes = {
+		locked_government_type = yes
+	}
+
+}

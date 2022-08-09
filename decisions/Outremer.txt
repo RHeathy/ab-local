@@ -1,0 +1,100 @@
+country_decisions = {
+
+	form_outremer = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_outremer_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = { exists = OTR }
+			NOT = { tag = HLR }
+			NOT = { tag = ROM }
+			NOT = { tag = TUR }
+			NOT = { tag = PAP }
+			NOT = { tag = BYZ }
+			NOT = { tag = LAT }
+			OR = {
+				tag = KOJ
+				tag = ATI
+				tag = CYP
+				tag = KNI
+			}
+			religion = catholic
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 379
+				province_id = 382
+				province_id = 2313
+				province_id = 377
+				province_id = 321
+				province_id = 380
+				province_id = 378
+			}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			owns = 379
+			owns = 382
+			owns = 2313
+			owns = 377
+			owns = 321
+			owns = 380
+			owns = 378
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+		}
+		effect = {
+			add_prestige = 25
+			change_tag = OTR
+			change_primary_culture = Outremer
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			379 = {
+				move_capital_effect = yes
+				change_culture = Outremer
+			}
+				if = {
+					limit = {
+						NOT = { government = theocracy }
+					}
+					change_government_to_monarchy = yes
+					add_government_reform = holy_state_reform
+					#set_legacy_government = holy_state_legacy
+				}
+				else_if = {
+					limit = {
+						government = theocracy
+					}
+					add_government_reform = holy_state_reform
+				}
+					
+			if = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				every_owned_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_in_empire = no
+				}
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			set_country_flag = formed_outremer_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+}

@@ -1,0 +1,102 @@
+swekingdom = {
+	icon = "swekingdom"
+	allow_convert = no
+	allow_normal_conversion = no
+	lock_level_when_selected = yes
+	legacy_equivalent = feudal_monarchy
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	modifiers = {
+		warscore_cost_vs_other_religion = -0.15
+		relation_with_heretics = -25
+	}
+}
+
+swenobles = {
+	icon = "swenobles"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	modifiers = {
+		land_morale = 0.05
+		manpower_in_true_faith_provinces= 0.05
+	}
+	ai = {
+		factor = 300
+	}
+}
+
+swewesternize = {
+	icon = "government_for_people_reform"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	modifiers = {
+		culture_conversion_cost = -0.2
+	}
+}
+
+swemission = {
+	icon = "monks"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	modifiers = {
+		missionaries = 1
+		missionary_maintenance_cost = -0.15
+		prestige_per_development_from_conversion = 0.33
+	}
+}
+
+sweleidang = {
+	icon = "sweleidang"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	modifiers = {
+		own_coast_naval_combat_bonus = 1
+		naval_forcelimit_modifier = 0.2
+	}
+}
+
+sweriksdag = {
+	icon = "admiral_king_reform"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = SWE
+			was_tag = SWE
+		}
+		religion = catholic
+	}
+	modifiers = {
+		reform_progress_growth = 0.15
+	}
+}

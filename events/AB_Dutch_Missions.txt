@@ -1,0 +1,60 @@
+namespace = ab_dutch
+normal_or_historical_nations = yes
+
+country_event = {
+	id = ab_dutch.1
+	title = ab_dutch.1.t
+	desc = ab_dutch.1.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	
+	hidden = yes 
+	
+	trigger = {
+		mission_completed = ned_shipbuilding
+	}
+	
+	option = {
+		name = ab_dutch.1
+		every_owned_province = {
+			limit = {
+				OR = {
+					has_building = shipyard
+					has_building = grand_shipyard
+				}
+			}
+			add_province_modifier = {
+				name = "ned_dutch_mission_shipyard"
+				duration = -1
+			}
+		}
+	}
+	
+}
+
+province_event = {
+	id = ab_dutch.2
+	title = ab_dutch.2.t
+	desc = ab_dutch.2.d
+	picture = COUNTRY_COLLAPSE_eventPicture
+	
+	hidden = yes 
+	
+	trigger = {
+		owner = {
+			mission_completed = ned_shipbuilding
+		}
+		has_province_modifier = ned_dutch_mission_shipyard
+		NOT = {
+			OR = {
+				has_building = shipyard
+				has_building = grand_shipyard
+			}
+		}
+	}
+	
+	option = {
+		name = ab_dutch.2
+			remove_province_modifier = ned_dutch_mission_shipyard
+	}
+	
+}

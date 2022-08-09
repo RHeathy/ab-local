@@ -1,0 +1,426 @@
+country_decisions = {
+
+	unite_tatars = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_tatars_flag }
+			culture_group = tartar
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = tartar
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_tatars_flag
+			add_dip_power = -200
+			change_primary_culture = tatar_culture
+			custom_tooltip = UNITE_TATAR_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = tartar
+					}
+					change_culture = tatar_culture
+				}
+				set_heir_culture = tatar_culture
+				set_ruler_culture = tatar_culture
+				every_country = {
+					limit = {
+						culture_group = tartar
+					}
+					change_primary_culture = tatar_culture
+					set_heir_culture = tatar_culture
+					set_ruler_culture = tatar_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_russians = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_russians_flag }
+			OR = {
+				primary_culture = russian
+				primary_culture = novgorodian
+				primary_culture = ryazanian
+			}
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = russian
+				culture = novgorodian
+				culture = ryazanian
+			}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			owns_all_provinces = {
+				culture = russian
+			}
+			owns_all_provinces = {
+				culture = novgorodian
+			}
+			owns_all_provinces = {
+				culture = ryazanian
+			}
+		}
+		effect = {
+			set_country_flag = ab_united_russians_flag
+			add_dip_power = -200
+			change_primary_culture = russian_culture
+			custom_tooltip = UNITE_RUSSIANS_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							culture = russian
+							culture = novgorodian
+							culture = ryazanian
+						}
+					}
+					change_culture = russian_culture
+				}
+				set_heir_culture = russian_culture
+				set_ruler_culture = russian_culture
+				every_country = {
+					limit = {
+						OR = {
+							primary_culture = russian
+							primary_culture = novgorodian
+							primary_culture = ryazanian
+						}
+					}
+					change_primary_culture = russian_culture
+					set_heir_culture = russian_culture
+					set_ruler_culture = russian_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_germans = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_germans_flag }
+			culture_group = germanic
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = germanic
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_germans_flag
+			add_dip_power = -200
+			change_primary_culture = german_culture
+			custom_tooltip = UNITE_GERMAN_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = germanic
+					}
+					change_culture = german_culture
+				}
+				set_heir_culture = german_culture
+				set_ruler_culture = german_culture
+				every_country = {
+					limit = {
+						culture_group = germanic
+					}
+					change_primary_culture = german_culture
+					set_heir_culture = german_culture
+					set_ruler_culture = german_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_japanese = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_japanese_flag }
+			culture_group = japanese_g
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = japanese_g
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_japanese_flag
+			add_dip_power = -200
+			change_primary_culture = japanese_culture
+			custom_tooltip = UNITE_JAPANESE_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = japanese_g
+					}
+					change_culture = japanese_culture
+				}
+				set_heir_culture = japanese_culture
+				set_ruler_culture = japanese_culture
+				every_country = {
+					limit = {
+						culture_group = japanese_g
+					}
+					change_primary_culture = japanese_culture
+					set_heir_culture = japanese_culture
+					set_ruler_culture = japanese_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_french = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_french_flag }
+			culture_group = french
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = french
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_french_flag
+			add_dip_power = -200
+			change_primary_culture = french_culture
+			custom_tooltip = UNITE_FRENCH_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = french
+					}
+					change_culture = french_culture
+				}
+				set_heir_culture = french_culture
+				set_ruler_culture = french_culture
+				every_country = {
+					limit = {
+						culture_group = french
+					}
+					change_primary_culture = french_culture
+					set_heir_culture = french_culture
+					set_ruler_culture = french_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_italian = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_italian_flag }
+			culture_group = latin
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = latin
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_italian_flag
+			add_dip_power = -200
+			change_primary_culture = italian_culture
+			custom_tooltip = UNITE_ITALIAN_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = latin
+					}
+					change_culture = italian_culture
+				}
+				set_heir_culture = italian_culture
+				set_ruler_culture = italian_culture
+				every_country = {
+					limit = {
+						culture_group = latin
+					}
+					change_primary_culture = italian_culture
+					set_heir_culture = italian_culture
+					set_ruler_culture = italian_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+
+	unite_iberian = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_iberian_flag }
+			culture_group = iberian
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = iberian
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_iberian_flag
+			add_dip_power = -200
+			change_primary_culture = iberian_culture
+			custom_tooltip = UNITE_IBERIAN_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = iberian
+					}
+					change_culture = iberian_culture
+				}
+				set_heir_culture = iberian_culture
+				set_ruler_culture = iberian_culture
+				every_country = {
+					limit = {
+						culture_group = iberian
+					}
+					change_primary_culture = iberian_culture
+					set_heir_culture = iberian_culture
+					set_ruler_culture = iberian_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+	
+	unite_altaic = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = ab_united_altaic_flag }
+			culture_group = altaic
+			has_institution = enlightenment
+		}
+		provinces_to_highlight = {
+			culture_group = altaic
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			dip_power = 200
+			stability = 3
+			has_institution = enlightenment
+			has_unified_culture_group = yes
+		}
+		effect = {
+			set_country_flag = ab_united_altaic_flag
+			add_dip_power = -200
+			change_primary_culture = turanian_culture
+			custom_tooltip = UNITE_TURANIAN_CULTURE
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = altaic
+					}
+					change_culture = turanian_culture
+				}
+				set_heir_culture = turanian_culture
+				set_ruler_culture = turanian_culture
+				every_country = {
+					limit = {
+						culture_group = altaic
+					}
+					change_primary_culture = turanian_culture
+					set_heir_culture = turanian_culture
+					set_ruler_culture = turanian_culture
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400	
+	}
+}

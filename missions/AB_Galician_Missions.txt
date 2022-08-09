@@ -1,0 +1,270 @@
+vol_second = {
+	slot = 1
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = VOL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	vol_convert = {
+		icon = mission_hands_praying
+		required_missions = { vol_kingdom }
+		position = 2
+		
+		trigger = {
+			religion = catholic
+			religious_unity = 1
+		}
+		
+		effect = {
+			add_stability = 1
+			add_papal_influence = 15
+			add_country_modifier = {
+				name = "vol_kingdom"
+				duration = 5475
+			}
+		}
+	}
+
+	vol_podolia = {
+		icon = mission_have_two_subjects
+		required_missions = { vol_convert }
+		position = 2
+		
+		trigger = {
+			owns = 281
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 281
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		effect = {
+			add_prestige = 10
+			add_legitimacy = 10
+		}
+	}
+	
+	vol_white = {
+		icon = mission_conquer_50_development
+		required_missions = { vol_cossack }
+		position = 4
+		
+		provinces_to_highlight = {
+			OR = {
+				area = pripyat_area
+				area = podlasie_area
+				area = minsk_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			pripyat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			podlasie_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			minsk_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+				add_country_modifier = {
+					name = vol_white
+					duration = 5475
+				}
+			}
+	}
+}
+
+vol_third = {
+	slot = 2
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = VOL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	vol_kingdom = {
+		icon = mission_monarch_in_throne_room
+		required_missions = { }
+		position = 1
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = vol_completed_event
+				OR = {
+				has_country_flag = completed_galician_event
+				has_country_flag = VOL_pope_reject
+				}
+			}
+		}
+		
+		effect = {
+			add_stability = 1
+			west_dniepr_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	vol_kiev = {
+		icon = mission_restore_kiev
+		required_missions = { vol_kingdom }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				area = west_dniepr_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			west_dniepr_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_adm_power = 100
+			1943 = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			5013 = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			282 = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			2406 = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			283 = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			minsk_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			pripyat_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			podlasie_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	vol_cossack = {
+		icon = mission_recruit_the_cossacks
+		required_missions = { vol_kiev }
+		position = 3
+		
+		trigger = {
+			owns = 1943
+			owns = 282
+			owns = 283
+			owns = 5013
+			owns = 2406
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1943
+				province_id = 282
+				province_id = 283
+				province_id = 5013
+				province_id = 2406
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		effect = {
+			add_army_tradition = 10
+			add_mil_power = 100
+			east_dniepr_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	vol_dniepr = {
+		icon = mission_advance_to_the_dnieper
+		required_missions = { vol_cossack }
+		position = 4
+		
+		provinces_to_highlight = {
+			OR = {
+				area = east_dniepr_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			east_dniepr_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_prestige = 15
+			add_dip_power = 100
+		}
+	}
+}

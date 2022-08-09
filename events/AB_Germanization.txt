@@ -1,0 +1,106 @@
+namespace = ab_germanization
+normal_or_historical_nations = yes
+
+country_event = {
+	id = ab_germanization.1
+	title = b_germanization.1.t
+	desc = b_germanization.1.d
+	picture = AB_BYZANTIUM_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		has_country_flag = german_wendia_flag
+	}
+	
+	option = {
+		name = ab_germanization.1.a
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = Wendish
+					culture = pommeranian
+					culture = sorbian
+				}
+			}
+			add_province_modifier = {
+				name = ab_germanize
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ab_germanization.2
+	title = b_germanization.2.t
+	desc = b_germanization.2.d
+	picture = AB_BYZANTIUM_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		has_country_flag = german_wendia_flag
+	}
+	
+	option = {
+		name = ab_germanization.1.a
+		every_owned_province = {
+			limit = {
+				culture_group = germanic
+				has_province_modifier = ab_germanize
+			}
+			remove_province_modifier = ab_germanize
+		}
+	}
+}
+
+country_event = {
+	id = ab_germanization.3
+	title = b_germanization.3.t
+	desc = b_germanization.3.d
+	picture = AB_BYZANTIUM_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		has_country_flag = german_prussia_flag
+	}
+	
+	option = {
+		name = ab_germanization.3.a
+		every_owned_province = {
+			limit = {
+				culture = pruthenian
+			}
+			add_province_modifier = {
+				name = ab_germanize
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ab_germanization.4
+	title = b_germanization.4.t
+	desc = b_germanization.4.d
+	picture = AB_BYZANTIUM_eventPicture
+	
+	hidden = yes
+	
+	trigger = {
+		has_country_flag = german_prussia_flag
+	}
+	
+	option = {
+		name = ab_germanization.1.a
+		every_owned_province = {
+			limit = {
+				culture_group = germanic
+				has_province_modifier = ab_germanize
+			}
+			remove_province_modifier = ab_germanize
+		}
+	}
+}

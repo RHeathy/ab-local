@@ -1,0 +1,30 @@
+government = monarchy
+add_government_reform = principality
+government_rank = 1
+technology_group = eastern
+religion = orthodox
+primary_culture = ruthenian
+capital = 280	# Kiev
+fixed_capital = 280 # Cannot move capital away from this province & no power cost to move to it
+
+1431.2.2 = {
+	monarch = {
+		name = "Valeriy II"
+		dynasty = "Rurikovich"
+		birth_date = 1383.9.1
+		adm = 3
+		dip = 3
+		mil = 4
+	}
+	heir = {
+		name = "Svyatoslav"
+		monarch_name = "Svyatoslav V"
+		dynasty = "Rurikovich"
+		birth_date = 1411.1.1
+		death_date = 1463.6.5
+		claim = 95
+		adm = 3
+		dip = 5
+		mil = 2
+	}
+}

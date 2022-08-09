@@ -1,0 +1,29 @@
+country_decisions = {
+	
+	rename_belarus = {
+		major = yes
+		potential = {
+			primary_culture = byelorussian
+			NOT = {
+				has_country_flag = renamed_belarus
+			}
+			NOT = {
+				any_country = {
+					has_country_flag = renamed_belarus
+				}
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			has_institution = nacionalizmus
+		}
+		effect = {
+			override_country_name = RENAME_BELARUS
+			set_country_flag = renamed_belarus
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

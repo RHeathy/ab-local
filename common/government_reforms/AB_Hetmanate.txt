@@ -1,0 +1,43 @@
+hetmanate = {
+	icon = "horde_riding"
+	legacy_equivalent = cossacks_legacy_reform
+	allow_normal_conversion = no
+	potential = {
+		tag = HTM
+	}
+	
+	raze_province = yes
+	government_abilities = {
+		cossacks_mechanic
+	}
+	valid_for_new_country = yes
+	lock_level_when_selected = yes
+
+	nation_designer_trigger = {
+		any_owned_province = {
+			has_terrain = steppe
+		}
+	}
+
+	conditional = {
+		allow = { has_dlc = "Origins" }
+		custom_attributes = {
+			has_itinerant_capital = yes
+		}
+	}
+
+	custom_attributes = {
+		enables_plutocratic_idea_group = no
+		enables_aristocratic_idea_group = yes
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 60
+
+	modifiers = {
+		cavalry_power = 0.25
+		cavalry_cost = -0.25
+		cav_to_inf_ratio = 0.25
+		governing_capacity = 200
+	}
+	duration = 4
+}

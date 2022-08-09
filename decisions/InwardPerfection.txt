@@ -1,0 +1,99 @@
+country_decisions = {
+
+	abandon_inward = {
+		major = yes
+		potential = {
+			has_reform = yuainward
+			NOT = { has_country_flag = abandoned_inward }
+		}
+		
+		allow = {
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+           	government_reform_progress = 250
+			stability = 1
+			if = {
+				limit = {
+					OR = {
+						tag = YUA
+						was_tag = YUA
+					}
+				}
+				OR = {
+					mission_completed = yua_china_tiger
+					mission_completed = yua_nest_tiger
+				}
+			}
+			else_if = {
+				limit = {
+					culture_group = east_asian
+					NOT = {
+						tag = YUA
+					}
+					NOT = {
+						was_tag = YUA
+					}
+					NOT = {
+						OR = {
+							primary_culture = korean
+							primary_culture = korean_new
+						}
+					}	
+				}
+				AND = {
+					mission_completed = china_dragon
+					mission_completed = china_tiger
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						primary_culture = korean
+						primary_culture = korean_new
+					}
+				}
+				AND = {
+					mission_completed = jsn_seoul
+					mission_completed = jsn_industry
+					mission_completed = jsn_koreana
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						tag = QNG
+						tag = JIN
+					}
+				}
+				AND = {
+					mission_completed = mch_china_great_wall
+					mission_completed = mch_china_metropolis
+					mission_completed = mch_china_tiger
+				}
+			}
+			else_if = {
+				limit = {
+					tag = LIO
+				}
+				AND = {
+					mission_completed = lio_china_great_wall
+					mission_completed = lio_china_metropolis
+					mission_completed = lio_china_tiger
+				}
+			}
+		}
+		effect = {
+			set_country_flag = abandoned_inward
+			add_stability = -2
+			change_government_reform_progress = -250
+			remove_government_reform = yuainward
+			add_country_modifier = {
+				name = "abandoned_inward_modifier"
+				duration = 18250
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

@@ -1,0 +1,64 @@
+iranzamin_rebuild = {
+	icon = "mvareform"
+	allow_normal_conversion = yes
+	potential = {
+		is_revolutionary = no
+		tag = ILK
+	}
+	modifiers = {
+		development_cost = -0.05
+		global_monthly_devastation = -0.5
+	}
+}
+
+iranzamin_admin = {
+	icon = "noble_indian"
+	allow_normal_conversion = yes
+	potential = {
+		is_revolutionary = no
+		tag = ILK
+	}
+	modifiers = {
+		state_maintenance_modifier = -0.1
+		adm_advisor_cost = -0.1
+	}
+}
+
+iranzamin_satraps = {
+	icon = "indian_crown"
+	allow_normal_conversion = yes
+	potential = {
+		is_revolutionary = no
+		tag = ILK
+	}
+	modifiers = {
+		vassal_forcelimit_bonus = 0.2
+		min_autonomy_in_territories = -0.2
+	}
+}
+
+iranzamin_azadan = {
+	icon = "nazcavalry"
+	allow_normal_conversion = yes
+	potential = {
+		is_revolutionary = no
+		tag = ILK
+	}
+	modifiers = {
+		cavalry_power = 0.1
+		cavalry_flanking = 0.25
+	}
+}
+
+iranzamin_tajik = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
+	potential = {
+		is_revolutionary = no
+		tag = ILK
+	}
+	modifiers = {
+		num_accepted_cultures = 2
+		promote_culture_cost = -0.25
+	}
+}

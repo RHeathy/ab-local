@@ -1,0 +1,79 @@
+country_decisions = {
+
+	rename_kievan_rus = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_kievan_rus }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = { tag = PAP }
+			NOT = { tag = HLR }
+			NOT = { tag = RUS }
+			tag = UKR
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 15
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2961
+				province_id = 279
+				province_id = 1937
+				province_id = 276
+				province_id = 280
+				province_id = 298
+				province_id = 275
+				province_id = 293
+				province_id = 307
+				province_id = 310
+				
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			legitimacy = 100
+			prestige = 100
+			NOT = {
+				exists = RUS
+			}
+			owns_core_province = 2961
+			owns_core_province = 279
+			owns_core_province = 1937
+			owns_core_province = 276
+			owns_core_province = 280
+			owns_core_province = 298
+			owns_core_province = 275
+			owns_core_province = 293
+			owns_core_province = 307
+			owns_core_province = 310
+		}
+		effect = {
+			add_prestige = 25
+			override_country_name = PROCLAIM_KIEVAN_RUS
+			set_country_flag = formed_kievan_rus
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

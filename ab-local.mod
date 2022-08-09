@@ -1,0 +1,18 @@
+tags={
+	"Alternative History"
+	"Expansion"
+	"Gameplay"
+	"Military"
+	"National Ideas"
+	"Religion"
+	"Utilities"
+	"New Nations"
+	"Missions And Decisions"
+	"Map"
+	"Events"
+}
+name="Ante Bellum (Local)"
+replace_path="common/bookmarks"
+replace_path="gfx/loadingscreens"
+supported_version="1.33.3"
+path="D:/Documents/Paradox Interactive/Europa Universalis IV/mod/ab-local"

@@ -1,0 +1,643 @@
+FIN_missions_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = FIN
+	}
+	has_country_shield = yes
+	
+	fin_laponia = {
+		icon = mission_extent_yasak_to_the_east
+		position = 2
+		required_missions = { fin_unite }
+		
+		provinces_to_highlight = {
+			OR = {
+				area = laponia_area
+				area = norrland_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			norrland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			laponia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_adm_power = 75
+			add_country_modifier = {
+				name = "fin_sami"
+				duration = 7300
+			}
+			karelia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_karelia = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	fin_karelia = {
+		icon = mission_advance_to_the_dnieper
+		position = 3
+		required_missions = { fin_laponia }
+		
+		provinces_to_highlight = {
+			OR = {
+			area = karelia_area
+			area = north_karelia
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			karelia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_karelia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "fin_convert"
+				duration = 5475
+			}
+			novgorod_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			pskov_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	fin_neva = {
+		icon = mission_danzig_or_war
+		required_missions = { fin_karelia }
+		position = 5
+		provinces_to_highlight = {
+			OR = {
+				province_id = 33
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			owns = 33
+			33 = {
+				development = 15
+			}
+			33 = {
+				OR = {
+					has_building = marketplace
+					has_building = trade_depot
+					has_building = stock_exchange
+				}
+			}
+		}
+		
+		effect = {
+			add_mercantilism = 3
+			33 = {
+				change_province_name = "Nevanlinna"
+				rename_capital = "Nevanlinna"
+			}
+			33 = {
+				add_province_modifier = {
+					name = "fin_neva"
+					duration = -1
+				}
+			}
+			33 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 25
+					key = swe_neva
+				}
+			}
+		}
+	}
+}
+
+FIN_missions_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = FIN
+	}
+	has_country_shield = yes
+	
+	fin_unite = {
+		icon = mission_conquer_finland
+		position = 1
+		required_missions = { }
+		
+		provinces_to_highlight = {
+			area = bothnia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			bothnia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			4152 = {
+				change_culture = finnish
+			}
+			4113 = {
+				change_culture = finnish
+			}
+			add_country_modifier = {
+				name = "fin_united"
+				duration = 5475
+			}
+			norrland_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			laponia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			pomor_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	fin_greater_finland = {
+		icon = mission_collect_yasak
+		position = 2
+		required_missions = { fin_unite }
+		
+		provinces_to_highlight = {
+			region = scandinavia_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				has_owner_culture = no
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = scandinavia_region
+				has_owner_culture = yes
+			}
+		}
+		
+		effect = {
+			custom_tooltip = FIN_PROVINCE_DEVCOST
+			random_owned_province = {
+				limit = {
+					culture = finnish
+					is_capital = no
+				}
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				limit = {
+					culture = finnish
+					is_capital = yes
+				}
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = finnish
+					}
+					add_province_modifier = {
+						name = "fin_devcost"
+						duration = 5475
+					}
+				}
+			}
+				
+		}
+	}
+	
+	fin_baltic_trade = {
+		icon = mission_scandinavian_port_authority
+		required_missions = { fin_fleet }
+		position = 3
+		
+		trigger = { 
+			1926 = {
+				is_strongest_trade_power = FIN
+			}
+		}
+		
+		effect = {
+			1926 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 25
+					key = fin_baltic
+				}
+			}
+			define_advisor = {
+				type = trader
+				skill = 3
+				culture = finnish
+				religion = ROOT
+				cost_multiplier = 0.5
+			}
+		}
+	}
+	
+	fin_novgorod = {
+		icon = mission_conquer_novgorod
+		position = 4
+		required_missions = { fin_karelia }
+		
+		provinces_to_highlight = {
+			OR = {
+			area = pskov_area
+			area = novgorod_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			pskov_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			novgorod_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_treasury = 500
+			add_country_modifier = {
+				name = "fin_invade_rus"
+				duration = 9125
+			}
+			estonia_ingria_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			4999 = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			35 = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	fin_estonia = {
+		icon = mission_rb_control_electors
+		position = 5
+		required_missions = { fin_novgorod }
+		
+		provinces_to_highlight = {
+			OR = {
+				area = estonia_ingria_area
+				province_id = 4999
+				province_id = 35
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			estonia_ingria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			35 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4999 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+		    if = {
+				limit = {
+					NOT = { accepted_culture = estonian }
+				}
+				add_accepted_culture = estonian
+			}
+			else = {
+				add_adm_power = 100
+			}
+			baltic_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+FIN_missions_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = FIN
+	}
+	has_country_shield = yes
+	
+	fin_fleet = {
+	    icon = mission_galleys_in_port
+		required_missions = {  }
+		position = 2
+		
+		trigger = {
+			navy_size_percentage = 1
+		}
+		
+		effect = {
+			add_navy_tradition = 15
+			add_country_modifier = {
+				name = "fin_fleet"
+				duration = 5475
+			}
+		}
+	}
+	
+	fin_whitesea = {
+		icon = mission_protect_white_sea_trade
+		required_missions = { fin_fleet }
+		position = 4
+		
+		
+		trigger = { 
+			1652 = {
+				is_strongest_trade_power = FIN
+			}
+		}
+		
+		effect = {
+			add_mercantilism = 5
+			add_country_modifier = {
+				name = "fin_white_sea"
+				duration = 5475
+			}
+		}
+	}
+}
+
+FIN_missions_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = FIN
+	}
+	has_country_shield = yes
+	
+	fin_capital = {
+	    icon = mission_eastern_european_city
+		required_missions = { }
+		position = 1
+
+		trigger = {
+			28 = {
+				owned_by = ROOT 
+				development = 25
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+				OR = {
+					has_building = temple
+					has_building = cathedral
+				}
+			}
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 28
+			}
+		}
+		
+		effect = {
+			28 = {
+				add_province_modifier = {
+					name = "fin_capital"
+					duration = -1
+				}
+			}
+			28 = {
+				if = {
+					limit = {
+						NOT = { province_has_center_of_trade_of_level = 1 }
+					}
+					center_of_trade = 1
+				}
+				else_if = {
+					limit = {
+						NOT = { province_has_center_of_trade_of_level = 3 }
+					}
+					add_center_of_trade_level = 1
+				}
+			}
+		}
+	}
+	
+
+	fin_fortify = {
+	    icon = mission_barlin
+		required_missions = { fin_capital }
+		position = 2
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+						has_building = fort_19th
+					}
+				}
+				amount = 5
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "fin_fortified"
+				duration = -1
+			}
+			define_advisor = {
+				type = fortification_expert
+				skill = 3
+				culture = finnish
+				religion = ROOT
+				cost_multiplier = 0.5
+			}
+		}
+	}
+	
+	fin_cavalry = {
+	    icon = mission_break_the_tatar_yoke
+		required_missions = { }
+		position = 3
+		
+		trigger = {
+			num_of_cavalry = 15
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "fin_cavalry"
+				duration = -1
+			}
+		}
+	}
+	
+	fin_talvisota = {
+	    icon = mission_rb_unite_the_clans
+		required_missions = { fin_cavalry }
+		position = 5
+		
+		trigger = {
+			full_idea_group = defensive_ideas
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "fin_talvisota"
+				duration = -1
+			}
+		}
+	}
+}
+
+FIN_missions_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = FIN
+	}
+	has_country_shield = yes
+	
+	fin_kingdom = {
+	    icon = mission_kingdom_finland
+		required_missions = { }
+		position = 3
+		
+		trigger = {
+			government_rank = 2
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "fin_kingdom"
+				duration = 7300
+			}
+			scandinavia_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	fin_scandinavia = {
+	    icon = mission_unite_home_region
+		required_missions = { fin_kingdom }
+		position = 5
+		
+		provinces_to_highlight = {
+			OR = {
+				region = scandinavia_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			scandinavia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 25
+			}
+			add_country_modifier = {
+				name = "fin_northern_power"
+				duration = -1
+			}
+		}
+	}	
+}

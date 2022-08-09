@@ -1,0 +1,58 @@
+spriteTypes  = {
+	### ROADS
+	spriteType = {
+		name = "GFX_early_road"
+		texturefile = "gfx//interface//buildings//early_road.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_gravel_road"
+		texturefile = "gfx//interface//buildings//gravel_road.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_royal_road"
+		texturefile = "gfx//interface//buildings//royal_road.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_macadam_road"
+		texturefile = "gfx//interface//buildings//macadam_road.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_rail_road"
+		texturefile = "gfx//interface//buildings//rail_road.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_fort_19th"
+		texturefile = "gfx//interface//buildings//fort_19th.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_eastern_fort_19th"
+		texturefile = "gfx//interface//buildings//eastern_fort_19th.tga"
+		loadType = "INGAME"
+	}
+		spriteType = {
+		name = "GFX_fort_19th_muslim"
+		texturefile = "gfx//interface//buildings//muslim_fort_19th.tga"
+		loadType = "INGAME"
+	}
+
+	
+	#banner
+	
+	spriteType = {
+		name = "GFX_banner_right_4"
+		texturefile = "gfx//interface//banner_right_4.dds"
+	}
+	spriteType = {
+		name = "GFX_macro_buildings_category_strip"
+		texturefile = "gfx//interface//macro_buildings_category_strip.dds"
+		noOfFrames = 10
+	}
+	
+
+}

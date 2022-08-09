@@ -1,0 +1,178 @@
+namespace = ab_novgorod
+normal_or_historical_nations = yes
+
+#Boyar Insurrection
+country_event = {
+	id = ab_novgorod.1
+	title = ab_novgorod.1.t
+	desc = ab_novgorod.1.d
+	picture = AB_NOVGOROD_eventPicture
+
+	major = yes
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = NOV
+		NOT = { mil = 3 }
+		NOT = { stability = 1 }
+		NOT = { legitimacy_equivalent = 80 }
+		NOT = {
+			government = monarchy
+		}
+	}
+	
+	option = {
+		name = ab_novgorod.1.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -2
+			NOV = {
+				if = {
+					limit = {
+						NOT = { government = monarchy }
+					}
+					change_government = monarchy
+				}
+				add_government_reform = principality
+			}
+		define_ruler = {
+			name = "Rostislav"
+			dynasty = "Rurikovich"
+			adm = 3
+			dip = 3
+			mil = 4
+			age = 28
+			claim = 75
+		}
+		add_ruler_modifier = {
+			name = ab_novgorod_liberator
+			duration = -1
+		}
+		russia_region = {
+				limit = {
+						NOT = { is_core = ROOT}
+						NOT = {owned_by = ROOT}
+					}
+				add_permanent_claim = ROOT
+			}
+	}
+	
+	option = {
+		name = ab_novgorod.1.b
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+		add_republican_tradition = 15
+		random_owned_province = {
+			spawn_rebels = {
+				type = noble_rebels
+				size = 3
+				leader = "Rostislav Rurikovich"
+			}
+		}
+	}
+}
+		
+#AI Help
+country_event = {
+	id = ab_novgorod.2
+	title = ab_novgorod.2.t
+	desc = ab_novgorod.2.d
+	picture = AB_NOVGOROD_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		ai = yes
+		tag = NOV
+		is_year = 1445
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = ab_novgorod.2.a
+		random_list = {
+			40 = { 
+				NOV = {
+					country_event = { id = ab_novgorod.3 }
+				}
+			}
+			60 = { }
+		}
+	}
+}
+
+#Boyar Insurrection 2
+country_event = {
+	id = ab_novgorod.3
+	title = ab_novgorod.1.t
+	desc = ab_novgorod.1.d
+	picture = AB_NOVGOROD_eventPicture
+
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ab_novgorod.1.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -2
+			NOV = {
+				if = {
+					limit = {
+						NOT = { government = monarchy }
+					}
+					change_government = monarchy
+				}
+				add_government_reform = principality
+			}
+		define_ruler = {
+			name = "Rostislav"
+			dynasty = "Rurikovich"
+			adm = 3
+			dip = 3
+			mil = 5
+			age = 28
+			claim = 75
+		}
+		add_ruler_modifier = {
+			name = ab_novgorod_liberator
+			duration = -1
+		}
+		russia_region = {
+				limit = {
+						NOT = { is_core = ROOT}
+						NOT = {owned_by = ROOT}
+					}
+				add_permanent_claim = ROOT
+			}
+	}
+	
+	option = {
+		name = ab_novgorod.1.b
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+		add_republican_tradition = 15
+		random_owned_province = {
+			spawn_rebels = {
+				type = noble_rebels
+				size = 3
+				leader = "Rostislav Rurikovich"
+			}
+		}
+	}
+}

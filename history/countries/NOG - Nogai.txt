@@ -1,0 +1,8 @@
+government = tribal
+add_government_reform = steppe_horde
+primary_culture = nogaybak
+religion = tengri_pagan_reformed
+add_secondary_religion = vajrayana
+technology_group = nomad_group
+capital = 465	# Saraycik
+

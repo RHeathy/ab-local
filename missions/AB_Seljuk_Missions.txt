@@ -1,0 +1,3262 @@
+sel_first = {
+	slot = 1 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	seljuk_convert = {
+		icon = mission_hands_praying
+		required_missions = { seljuk_dominate_beyliks }
+		position = 2
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				religion = ROOT
+			}
+		}
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 25
+				OR = {
+					culture = turkish
+					culture = turkish_new 
+				}
+				religion = ROOT
+			}
+		}
+		
+		effect = {
+			if = {
+				limit = {
+					piety = 0
+				}
+				add_piety = 0.2
+			}
+			else_if = {
+				limit = {
+					NOT = { piety = 0 }
+				}
+				add_piety = -0.2
+			}
+			define_advisor = {
+				type = theologian
+				skill = 2
+				religion = ROOT
+				culture = ROOT
+				cost_multiplier = 0.5
+			}
+		}
+	}
+	
+	seljuk_cilicia = {
+		icon = knights_of_the_new_world
+		required_missions = { }
+		position = 3
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4298
+				province_id = 332
+				province_id = 327
+				province_id = 5133
+				province_id = 5134
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			4298 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			332 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			327 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			5133 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			5134 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_CILICIA
+			tooltip = {
+				add_province_modifier = {
+					name = "seluk_displace"
+					duration = -1
+				}
+			}
+			5132 = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			2313 = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_core = CLC
+					}
+					add_province_modifier = {
+						name = "seluk_displace"
+						duration = -1
+					}
+				}
+			}
+			
+		}
+	}
+
+	seljuk_syria = {
+		icon = mission_afghan_frontier
+		position = 5
+		required_missions = { seljuk_legacy }
+		
+		provinces_to_highlight = {
+			OR = {
+				area = aleppo_area
+				area = syria_area
+				area = syrian_desert_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			aleppo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			syria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			syrian_desert_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		}
+		
+		effect = {
+			add_yearly_manpower = 3
+			add_country_modifier = {
+				name = "seljuk_levantine"
+				duration = 9125
+			}
+			palestine_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = {  is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			trans_jordan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = {  is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SELJUK_NIZZARID
+			tooltip = {
+				add_ruler_modifier = {
+					name = "seljuk_breaker"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							NAZ = {
+								total_development = ROOT
+							}
+						}
+					}
+					add_ruler_modifier = {
+						name = "seljuk_breaker"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_egypt = {
+		icon = mission_nizzarid
+		required_missions = { seljuk_palestine }
+		position = 7
+		
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			egypt_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_army_tradition = 25
+			add_country_modifier = {
+				name = "seljuk_usurper"
+				duration = 9125
+			}
+			custom_tooltip = SEL_GREAT_SELJUKS
+		}
+	}
+	
+	seljuk_caliphate = {
+		icon = mission_restore_faith_in_the_throne
+		required_missions = { seljuk_egypt }
+		position = 8
+		
+		provinces_to_highlight = {
+			region = egypt_region
+			local_autonomy_above_min = 10
+			nationalism = 1
+		}
+		
+		trigger = {
+			legitimacy = 100
+			egypt_region = {
+				type = all
+				country_or_subject_holds = ROOT
+				NOT = { local_autonomy_above_min = 10 }
+				NOT = { nationalism = 1 }
+			}
+		}
+		
+		effect = {
+			country_event = { id = ab_seljuk.14 }
+		}
+	}
+
+}
+
+sel_first_branching = {
+	slot = 1 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = {
+			has_country_flag = seljuk_arab
+		}
+		NOT = {
+			has_country_flag = seljuk_turan
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_branching_4 = {
+		icon = mission_unknown_mission
+		position = 9
+		required_missions = { seljuk_branching_1 }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SELJUK_BRANCHING
+				has_country_flag = seljuk_branching_flag
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_BRANCHING
+		}
+	}
+}
+
+sel_first_arab = {
+	slot = 1 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_arab
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_sicily = {
+		icon = mission_seize_the_isles
+		position = 9
+		required_missions = { seljuk_tunisia }
+		
+		provinces_to_highlight = {
+			OR = {
+				area = sicily_area
+				area = western_sicily_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			western_sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		}
+		
+		effect = {
+			create_admiral = { tradition = 100 }
+			add_country_modifier = {
+				name = "seljuk_med"
+				duration = 9125
+			}
+			calabria_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			apulia_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			naples_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			corsica_sardinia_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SEL_SICILY_CORES
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							exists = SIC
+						}
+					}
+					every_province = {
+						limit = {
+							is_core = SIC
+							NOT = {
+								owned_by = ROOT
+							}
+						}
+						add_territorial_core = ROOT
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+sel_first_turan = {
+	slot = 1 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_turan
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+
+	seljuk_russian_subjects = {
+	    icon = mission_rule_ruthenia
+		required_missions = { seljuk_turan_north }
+		position = 9
+		
+		provinces_to_highlight = {
+			OR = {
+				region = russia_region
+				region = ruthenia_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = seljuk_russia_ruthenia
+				OR = {
+					num_of_owned_provinces_with = {
+						value = 25
+						OR = {
+							region = russia_region
+							region = ruthenia_region
+						}
+					}
+					calc_true_if = {
+						all_subject_country = {
+							OR = {
+								capital_scope = { region = russia_region }
+								capital_scope = { region = ruthenia_region }
+							}
+						}
+						amount = 5
+					}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = SELJUK_RUSSIA_1
+			tooltip = {
+				russia_region  = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+				ruthenia_region  = {
+					limit = {
+						NOT = { is_permanent_claim = ROOT	}
+						NOT = { is_core = ROOT	}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = SELJUK_RUSSIA_2
+			tooltip = {
+				add_country_modifier = {
+					name = sel_yoke
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						num_of_owned_provinces_with = {
+							value = 25
+							OR = {
+								region = russia_region
+								region = ruthenia_region
+							}
+						}
+					}
+					russia_region  = {
+						limit = {
+							NOT = { is_permanent_claim = ROOT	}
+							NOT = { is_core = ROOT	}
+						}
+						add_permanent_claim = ROOT
+					}
+					ruthenia_region  = {
+						limit = {
+							NOT = { is_permanent_claim = ROOT	}
+							NOT = { is_core = ROOT	}
+						}
+						add_permanent_claim = ROOT
+					}
+				}
+				else_if = {
+					limit = {
+						calc_true_if = {
+							all_subject_country = {
+								OR = {
+									capital_scope = { region = russia_region }
+									capital_scope = { region = ruthenia_region }
+								}
+							}
+							amount = 5
+						}
+					}
+					add_country_modifier = {
+						name = sel_yoke
+						duration = -1
+					}
+				}
+			}
+		}
+	}		
+	
+
+}	
+
+sel_first_2 = {
+	slot = 1 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_bridging = {
+		icon = mission_conquer_malwa_mer
+		required_missions = { }
+		position = 12
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+				NOT = {
+					OR = { 
+						has_building = early_road
+						has_building = gravel_road
+						has_building = royal_road
+						has_building = macadam_road
+						has_building = rail_road
+					}
+				}
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					OR = { 
+						has_building = early_road
+						has_building = gravel_road
+						has_building = royal_road
+						has_building = macadam_road
+						has_building = rail_road
+					}
+				}
+				amount = 10
+			}
+		}
+	
+		effect = {
+			add_country_modifier = {
+				name = "seljuk_bridging"
+				duration = 7300
+			}
+		}
+	}
+	
+	seljuk_faith = {
+		icon = mission_interfaith_relations
+		required_missions = { seljuk_golden }
+		position = 14
+		
+		trigger = {
+			OR = {
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = seljuk_tolerance_heathen
+						has_global_modifier_value = {
+							which = tolerance_heathen
+							value = 2
+						}
+					}
+					num_of_estate_privileges = {
+						estate = estate_dhimmi
+						value = 4
+					}
+				}
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = seljuk_tolerance_own
+						has_global_modifier_value = {
+							which = tolerance_own
+							value = 4
+						}
+					}
+					religious_unity = 0.9
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_REL_1
+			tooltip = {
+				add_country_modifier = {
+					name = seljuk_rights
+					duration = -1
+				}
+			}
+			custom_tooltip = SELJUK_REL_2
+			tooltip = {
+				add_country_modifier = {
+					name = seljuk_true
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_global_modifier_value = {
+							which = tolerance_heathen
+							value = 2
+						}
+						num_of_estate_privileges = {
+							estate = estate_dhimmi
+							value = 4
+						}
+					}
+					add_country_modifier = {
+						name = seljuk_rights
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						has_global_modifier_value = {
+							which = tolerance_own
+							value = 4
+						}
+						religious_unity = 0.9
+					}
+					add_country_modifier = {
+						name = seljuk_true
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_commemorate = {
+		icon = mission_protect_albania
+		required_missions = { seljuk_faith }
+		position = 16
+		
+		provinces_to_highlight = {
+			province_id = 2306
+		}
+		
+		trigger = {
+			treasury = 2500
+			adm_power = 200
+			2306 = {
+				culture = ROOT
+				religion = ROOT
+			}
+		}
+		
+		effect = {
+			add_treasury = -2500
+			add_adm_power = -200
+			custom_tooltip = SEL_CREATE_MONUMENT
+			set_country_flag = seljuk_monument_flag
+			hidden_effect = {
+				2306 = {
+					add_great_project = {
+						type = alp_arslan
+						instant = yes
+					}
+				}
+				2306 = {
+					add_great_project_tier = {
+						type = alp_arslan
+						tier = 3
+					}
+				}
+			}
+			custom_tooltip = SEL_CAPITAL
+		}
+	}
+	
+}
+
+sel_second = {
+	slot = 2 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_dominate_beyliks = {
+		icon = anatolian_frontier
+		required_missions = { }
+		position = 1
+		
+		provinces_to_highlight = {
+			culture = turkish
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				culture = turkish
+			}
+		}
+		
+		effect = {
+			add_mil_power = 50
+			custom_tooltip = SEL_CONVERT_TURK
+			tooltip = {
+				add_province_modifier = {
+					name = "seluk_convert"
+					duration = -1
+				}
+			}
+			anatolia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_legacy = {
+		icon = mission_seljuk
+		required_missions = { seljuk_dominate_beyliks seljuk_cilicia }
+		position = 4
+		
+		provinces_to_highlight = {
+			culture = turkish
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			owns_all_provinces = {
+				culture = turkish
+			}
+		}
+		
+		effect = {
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 10
+			}
+			add_country_modifier = {
+				name = "sel_supremacy"
+				duration = 5475
+			}
+			aleppo_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = {  is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			syria_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = {  is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			syrian_desert_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = {  is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_pasha = {
+		icon = mission_defeat_mewar
+		required_missions = { seljuk_legacy }
+		position = 5
+
+		trigger = {
+            calc_true_if = {
+                all_owned_province = {
+                    has_pasha = yes
+                }
+                amount = 50
+            }
+		}
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				has_pasha = yes
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SEL_PASHA
+			add_country_modifier = {
+				name = "sel_pashas"
+				duration = -1
+			}
+			custom_tooltip = SEL_PASHA_REFORMED
+			hidden_effect = {
+                for = {
+                    amount = 10
+                    effect = "
+                        random_owned_province = {
+							limit = {
+								has_pasha = yes
+							}
+							add_base_manpower = 1
+                        }
+                    "
+                }
+			}
+		}
+	}
+	
+	seljuk_palestine = {
+		icon = kingdom_of_heaven
+		position = 6
+		required_missions = { seljuk_syria }
+		
+		provinces_to_highlight = {
+			area = palestine_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			palestine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		}
+		
+		effect = {
+			if = {
+				limit = {
+					piety = 0
+				}
+				add_piety = 0.25
+			}
+			else_if = {
+				limit = {
+					NOT = { piety = 0 }
+				}
+				add_piety = -0.25
+			}
+			add_country_modifier = {
+				name = sel_jerusalem_custodian
+				duration = -1
+			}
+			
+			tabuk_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			medina_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			mecca_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			egypt_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+		
+	
+}
+
+sel_second_branching = {
+	slot = 2 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = {
+			has_country_flag = seljuk_arab
+		}
+		NOT = {
+			has_country_flag = seljuk_turan
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_branching_1 = {
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = { seljuk_cities }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SELJUK_BRANCHING
+				has_country_flag = seljuk_branching_flag
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_BRANCHING
+		}
+	}
+	
+	seljuk_branching_2 = {
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = { seljuk_branching_1 }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SELJUK_BRANCHING
+				has_country_flag = seljuk_branching_flag
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_BRANCHING
+		}
+	}
+	
+	seljuk_branching_3 = {
+		icon = mission_unknown_mission
+		position = 8
+		required_missions = { seljuk_branching_2 }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SELJUK_BRANCHING
+				has_country_flag = seljuk_branching_flag
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_BRANCHING
+		}
+	}
+	
+}
+
+sel_second_arab = {
+	slot = 2 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_arab
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_tunisia = {
+	    icon = mission_traverse_the_sahara
+		required_missions = { seljuk_cities }
+		position = 8
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				region = maghreb_region
+				value = 20
+			}
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				region = maghreb_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "sel_bedouin"
+				duration = 7300
+			}
+			sicily_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+			western_sicily_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_maghreb = {
+	    icon = mission_moroccan_ports
+		required_missions = { seljuk_tunisia }
+		position = 9
+		
+		provinces_to_highlight = {
+			region = maghreb_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			maghreb_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			change_mil = 1
+			add_country_modifier = {
+				name = "sel_faithful"
+				duration = -1
+			}
+			lower_andalucia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+			upper_andalucia_area = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_andalusia = {
+	    icon = mission_reclaim_andalucia
+		required_missions = { seljuk_maghreb }
+		position = 10
+		
+		provinces_to_highlight = {
+			OR = {
+				area = upper_andalucia_area
+				area = lower_andalucia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			upper_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			if = {
+				limit = {
+					piety = 0
+				}
+				add_piety = 0.5
+			}
+			else_if = {
+				limit = {
+					NOT = { piety = 0 }
+				}
+				add_piety = -0.5
+			}
+			add_country_modifier = {
+				name = "sel_caliphate_restored"
+				duration = -1
+			}
+			iberia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+			custom_tooltip = SEL_ADU_ACCEPTED
+			tooltip = {
+				225 = {
+					add_great_project_tier = {
+						type = alhambra
+						tier = 1 
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						accepted_culture = andalucian
+					}
+					225 = {
+						add_great_project_tier = {
+							type = alhambra
+							tier = 1 
+						}
+					}	
+				}
+			}
+		}
+	}
+	
+}
+			
+
+sel_second_turan = {
+	slot = 2 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_turan
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_turan_north = {
+	    icon = mission_chinese_general_riding
+		required_missions = { seljuk_cities }
+		position = 8
+		
+		provinces_to_highlight = {
+			OR = {
+				region = caucasia_region
+				region = crimea_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			caucasia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			crimea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "sel_steppe"
+				duration = 7300
+			}
+			ruthenia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+			russia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_claim = ROOT
+			}
+			ural_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	
+	seljuk_turan_horde = {
+	    icon = mission_non-western_cavalry_raid
+		required_missions = { seljuk_turan_north }
+		position = 9
+		
+		provinces_to_highlight = {
+			region = ural_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+				NOT = {
+					GLH = {
+						army_size = ROOT
+					}
+				}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = ural_region
+			}
+		}
+		effect = {
+			add_prestige = 25
+			add_country_modifier = {
+				name = "sel_mongol"
+				duration = -1
+			}
+			central_asia_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_turan_asia = {
+	    icon = mission_turan
+		required_missions = { seljuk_turan_horde }
+		position = 10
+		
+		provinces_to_highlight = {
+			region = central_asia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			central_asia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event = { id = ab_seljuk.2 }
+		}
+	}
+	
+}
+
+sel_second_2 = {
+	slot = 2 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_caravan = {
+		icon = mission_conquer_malwa_bah
+		required_missions = { }
+		position = 11
+		
+		provinces_to_highlight = {
+			province_id = 377
+		}
+		
+		trigger = {
+			num_of_centers_of_trade = 5
+			calc_true_if = {
+				all_owned_province = {
+					OR = {
+						has_building = marketplace
+						has_building = trade_depot
+						has_building = stock_exchange
+					}
+				}
+				amount = 5
+			}
+			377 = {
+				is_strongest_trade_power = ROOT
+			}
+		}
+	
+		effect = {
+			add_estate_loyalty = { estate = estate_burghers loyalty = 10 }
+			add_country_modifier = {
+				name = "seljuk_caravans"
+				duration = -1
+			}
+			custom_tooltip = SEL_TRADE_MISSION
+			tooltip = {
+				define_advisor = {
+					type = trader
+					skill = 2
+					religion = ROOT
+					culture = ROOT
+					cost_multiplier = 0.5
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						trade_income_percentage = 0.35
+					}
+					define_advisor = {
+						type = trader
+						skill = 2
+						religion = ROOT
+						culture = ROOT
+						cost_multiplier = 0.5
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_golden = {
+		icon = mission_conquer_gujarat_bah
+		required_missions = { seljuk_caravan seljuk_bridging }
+		position = 13
+		
+		trigger = {
+			stability = 2
+			prestige = 50
+			share_of_starting_income = 2
+		}
+		
+		effect = {
+			capital_scope = { add_prosperity = 100 }
+			add_ruler_modifier = {
+				name = seljuk_golden_age
+				duration = -1
+			}
+			custom_tooltip = SEL_SPLENDOR
+			tooltip = {
+				add_splendor = 200
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						in_golden_age = yes
+					}
+					add_splendor = 200
+				}
+			}
+		}
+	}
+	
+	seljuk_urbanize = {
+		icon = mission_colonial
+		required_missions = { seljuk_golden }
+		position = 14
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = anatolia_region
+				development = 20
+			}
+		}
+		
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = { development = 20 }
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_URBAN
+			tooltip = {
+				add_province_modifier = {
+					name = seljuk_urbanization
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = anatolia_region
+						development = 20
+					}
+					add_province_modifier = {
+						name = seljuk_urbanization
+						duration = -1
+					}
+				}
+			}
+			define_advisor = {
+				type = architect
+				skill = 3
+				religion = ROOT
+				culture = ROOT
+				cost_multiplier = 0.5
+			}
+		}
+	}
+	
+	seljuk_industry = {
+	    icon = mission_industrialize_bengal
+		required_missions = { seljuk_urbanize }
+		position = 15
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				OR = {
+					has_building = mills
+					has_building = farm_estate
+					has_building = tradecompany
+					has_building = plantations
+					has_building = textile
+					has_building = weapons
+					has_building = wharf
+					has_building = furnace
+				}
+			}
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					OR = {
+						has_building = mills
+						has_building = farm_estate
+						has_building = tradecompany
+						has_building = plantations
+						has_building = textile
+						has_building = weapons
+						has_building = wharf
+						has_building = furnace
+					}
+				}
+				amount = 30
+			}
+		}
+		
+		effect = {
+			custom_tooltip = AB_15_MANUFCATORIES_PROD
+			add_country_modifier = {
+				name = seljuk_indus
+				duration = 9125
+			}
+			hidden_effect = {		
+                for = {
+                    amount = 15
+                    effect = "
+                        random_owned_province = {
+							limit = {
+								has_manufactory_trigger = yes
+							}
+							add_base_production = 1
+                        }
+                    "
+                }
+			}
+		}
+	}
+	
+	seljuk_diwan = {
+	    icon = mission_gharbianss
+		required_missions = { seljuk_industry }
+		position = 17
+		
+		trigger = {
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
+			num_of_owned_provinces_with = {
+				OR = {
+					has_building = courthouse
+					has_building = town_hall
+				}
+				value = 15
+			}
+		}
+		
+		effect = {
+			change_government_reform_progress = 50
+			add_country_modifier = {
+				name = seljuk_diwan
+				duration = -1
+			}
+		}
+	}
+}
+
+sel_third = {
+	slot = 3 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_baghdad = {
+	    icon = mission_into_persia_1
+		required_missions = { seljuk_kayfa }
+		position = 3
+		
+		provinces_to_highlight = {
+			OR = {
+				area = iraq_arabi_area
+				area = al_jazira_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			iraq_arabi_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			al_jazira_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_adm_power = 100
+			custom_tooltip = SEL_DEVASTATION
+			add_country_modifier = {
+				name = "sel_house"
+				duration = 7300
+			}
+			basra_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			hidden_effect = {
+				al_jazira_area = {
+					add_devastation = -100
+				}
+				iraq_arabi_area = {
+					add_devastation = -100
+				}
+			}
+		}
+	}
+	
+	seljuk_house = {
+	    icon = mission_gawans_madrasar
+		required_missions = { seljuk_baghdad }
+		position = 4
+		
+		provinces_to_highlight = {
+			province_id = 410
+		}
+		trigger = {
+			DIP = 4
+			410 = {
+				development = 25
+				has_building = university
+			}
+		}
+		effect = {
+			change_innovativeness = 5
+			add_country_modifier = {
+				name = "sel_house"
+				duration = 5475
+			}
+		}
+	}
+	
+	seljuk_nicaea = {
+	    icon = revenge_for_nicopolis
+		required_missions = { seljuk_legacy }
+		position = 5
+		
+		provinces_to_highlight = {
+			area = hudavendigar_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			NOT = {
+				exists = NCI
+			}
+			hudavendigar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_army_professionalism = 0.05
+			add_country_modifier = {
+				name = "sel_bulwark"
+				duration = 9125
+			}
+			thrace_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_city = {
+	    icon = end_the_schism
+		required_missions = { seljuk_nicaea }
+		position = 6
+		
+		provinces_to_highlight = {
+			province_id = 151
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			owns = 151
+		}
+		
+		effect = {
+			country_event = { id = ab_seljuk.13 }
+			macedonia_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_greece_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			morea_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SEL_TRADE_MISSION
+			tooltip = {
+				151 = {
+					add_province_modifier = {
+						name = seljuk_deal
+						duration = 9125
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						trade_income_percentage = 0.33
+					}
+					151 = {
+						add_province_modifier = {
+							name = seljuk_deal
+							duration = 9125
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_cities = {
+		icon = mission_into_arabia
+		position = 7
+		required_missions = { seljuk_palestine }
+		
+		provinces_to_highlight = {
+			OR = {
+				area = tabuk_area
+				area = mecca_area
+				area = medina_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			tabuk_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			mecca_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			medina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		}
+		
+		effect = {
+			country_event = { id = ab_seljuk.1 }
+		}
+	}
+}
+
+sel_third_branching = {
+	slot = 3 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = {
+			has_country_flag = seljuk_arab
+		}
+		NOT = {
+			has_country_flag = seljuk_turan
+		}
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_branching_5 = {
+		icon = mission_unknown_mission
+		position = 9
+		required_missions = { seljuk_branching_1 }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SELJUK_BRANCHING
+				has_country_flag = seljuk_branching_flag
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SELJUK_BRANCHING
+		}
+	}
+}
+
+sel_third_arab = {
+	slot = 3 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_arab
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_arab_tradition = {
+	    icon = mission_into_persia_2
+		required_missions = { seljuk_tunisia }
+		position = 9
+		
+		provinces_to_highlight = {
+			OR = {
+				culture_group = turko_semitic
+				nationalism = 1
+				local_autonomy_above_min = 10
+			}
+			owned_by = ROOT
+		}
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				culture_group = turko_semitic
+				NOT = { local_autonomy_above_min = 10 }
+				NOT = { nationalism = 1 }
+				value = 100
+			}
+		}
+		
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = seljuk_tradition
+				duration = -1
+			}
+		}
+	}
+}
+
+sel_third_turan = {
+	slot = 3 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		has_country_flag = seljuk_turan
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_turan_islamize = {
+	    icon = mission_kowtow
+		required_missions = { seljuk_turan_north }
+		position = 9
+		
+		provinces_to_highlight = {
+			superregion = eastern_europe_superregion
+			NOT = {
+				religion = ROOT
+			}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				superregion = eastern_europe_superregion
+				religion = ROOT
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					piety = 0
+				}
+				add_piety = 0.5
+			}
+			else_if = {
+				limit = {
+					NOT = { piety = 0 }
+				}
+				add_piety = -0.5
+			}
+			define_advisor = {
+				type = inquisitor
+				skill = 3
+				religion = ROOT
+				culture = ROOT
+				cost_multiplier = 0.35
+			}
+		}
+			
+	}
+	
+}
+
+sel_third_second = {
+	slot = 3 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_sindh = {
+	    icon = mission_unite_the_deccan
+		required_missions = { seljuk_kirthar }
+		position = 11
+		
+		provinces_to_highlight = {
+			OR = {
+				area = sindh_area
+				area = northern_sindh_area
+				area = multan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			sindh_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_sindh_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			multan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			504 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 35
+					key = mer_sindh_conquest
+				}
+			}
+			add_country_modifier = {
+				name = seljuk_triumph
+				duration = 9125
+			}
+			west_india_region  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_westindia = {
+	    icon = mission_unite_west_india
+		required_missions = { seljuk_sindh }
+		position = 11
+		
+		provinces_to_highlight = {
+			region = west_india_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			west_india_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_army_professionalism = 0.05
+			add_country_modifier = {
+				name = "seljuk_support"
+				duration = 9125
+			}
+			deccan_region = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_janissary = {
+	    icon = mission_non-western_soldiers
+		required_missions = { }
+		position = 14
+		
+		trigger = {
+			num_of_infantry = 20
+			janissary_percentage = 0.25
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "seljuk_janissaries"
+				duration = 7300
+			}
+		}
+	}
+	
+	seljuk_discipline = {
+	    icon = mission_integrate_the_purbias
+		required_missions = { seljuk_sipahi }
+		position = 16
+		
+		trigger = {
+			army_professionalism = 0.5
+			calc_true_if = {
+				all_owned_province = {
+					OR = {
+						has_building = barracks
+						has_building = training_fields
+					}
+				}
+				amount = 20
+			}
+		}
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				OR = {
+					has_building = barracks
+					has_building = training_fields
+				}
+			}
+		}
+		
+		effect = {
+			add_army_tradition = 20
+			add_country_modifier = {
+				name = "seljuk_army"
+				duration = -1
+			}
+			custom_tooltip = SEL_EVOLVING_IDEA_1
+			hidden_effect = {
+				set_country_flag = sel_evolved_ideas
+				if = {
+					limit = {
+						tag = SEL
+					}
+					swap_free_idea_group = yes
+				}
+				else_if = {
+					limit = {
+						OR = {
+							tag = TCL
+							tag = TRN
+						}
+					}
+					add_country_modifier = {
+						name = sel_evolving_modifier
+						duration = -1
+					}
+				}
+			}
+		}
+	}	
+	
+}
+
+
+sel_fourth = {
+	slot = 4 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_kayfa = {
+		icon = mission_reclaim_morocco
+		required_missions = { }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4295
+				province_id = 4292
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			4295 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4292 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_legitimacy = 10
+			add_country_modifier = {
+				name = "sel_ayyubids"
+				duration = 5475
+			}
+			iraq_arabi_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			al_jazira_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SEL_VASSALS
+			tooltip = {
+				add_dip_power = 50
+				add_country_modifier = {
+					name = "sel_vassal"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						HSN = {
+							is_subject_of = ROOT
+						}
+					}
+					add_dip_power = 50
+					add_country_modifier = {
+						name = "sel_vassal"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_vassals = {
+		icon = mission_trade_in_gold_coast
+		required_missions = { seljuk_kayfa }
+		position = 3
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = SEL_TRIBUTARY_OR_VASSAL
+				OR = {
+					calc_true_if = {
+						desc = establish_tributaries_tt
+						all_country = {
+							is_subject_of_type = tributary_state
+							is_subject_of = ROOT
+						}
+						amount = 10
+					}
+					calc_true_if = {
+						all_country = {
+							OR = {
+								is_subject_of_type = vassal
+								is_subject_of_type = march
+							}
+							is_subject_of = ROOT
+						}
+						amount = 3
+					}
+				}
+			}
+		}
+		
+		effect = {
+			add_years_of_income = 0.5
+			add_country_modifier = {
+				name = "sel_tributary"
+				duration = -1
+			}
+		}
+	}
+	
+	seljuk_basra = {
+		icon = mission_market_place_with_asian_traders
+		position = 4
+		required_missions = { seljuk_baghdad }
+	
+		trigger = {
+			basra_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		}
+		
+		provinces_to_highlight = {
+			area = basra_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			408 = {
+				if = {
+					limit = {
+						NOT = { province_has_center_of_trade_of_level = 1 }
+					}
+					center_of_trade = 1
+				}
+				else_if = {
+					limit = {
+						NOT = { province_has_center_of_trade_of_level = 3 }
+					}
+					add_center_of_trade_level = 1
+				}
+			}
+			408 = {
+				add_unit_construction = {
+					type = light_ship
+					amount = 5
+					speed = 0.25
+					cost = 0
+				}
+			}
+			bahrain_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			pirate_coast_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			oman_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			mascat_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_gulf = {
+		icon = mission_arabian_sea_trade
+		required_missions = { seljuk_basra }
+		position = 6
+		
+		provinces_to_highlight = {
+			OR = {
+				area = mascat_area
+				area = oman_area
+				area = pirate_coast_area
+				area = bahrain_area
+			}
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			mascat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			oman_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pirate_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bahrain_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_mercantilism = 3
+			add_country_modifier = {
+				name = sel_gulf_persia
+				duration = 7300
+			}
+			arabia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SEL_TRADE
+			tooltip = {
+				add_years_of_income = 1.5
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						AND = {	
+							2999 = {
+								is_strongest_trade_power = ROOT
+							}			
+							408 = {
+								is_strongest_trade_power = ROOT
+							}
+						}
+					}
+				add_years_of_income = 1.5
+				}
+			}
+		}
+	}
+	
+	seljuk_sands = {
+		icon = mission_fatimid_caliphate
+		required_missions = { seljuk_gulf seljuk_cities }
+		position = 8
+		
+		provinces_to_highlight = {
+			region = arabia_region
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			arabia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			change_mil = 1
+			add_country_modifier = {
+				name = sel_ghulam
+				duration = -1
+			}
+			custom_tooltip = SEL_MERCS
+		}
+	}
+	
+	seljuk_khorasan = {
+		icon = mission_fortify_mandu
+		required_missions = { seljuk_iran }
+		position = 9
+		
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = khorasan_region
+			}
+		}
+		
+		effect = {
+			add_yearly_manpower = 2
+			add_country_modifier = {
+				name = sel_campaign
+				duration = 7300
+			}
+			transoxiana_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			termez_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_kirthar = {
+		icon = mission_subdue_rajputana
+		required_missions = { seljuk_khorasan }
+		position = 10
+		
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			khorasan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			create_general = { tradition = 100 }
+			define_advisor = {
+				type = commandant
+				skill = 3
+				religion = ROOT
+				culture = ROOT
+				cost_multiplier = 0.5
+			}
+			northern_sindh_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			sindh_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			multan_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			lahore_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			sind_sagar_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			kashmir_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = SELJUK_INDIA
+			tooltip = {
+				add_country_modifier = {
+					name = sel_india
+					duration = 7300
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							any_country = {
+								capital_scope = { 
+									superregion = india_superregion
+								}
+								army_size = ROOT
+							}
+						}
+					}
+					add_country_modifier = {
+						name = sel_india
+						duration = 7300
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_indian_trade = {
+		icon = mission_the_chola_campaigns
+		required_missions = { seljuk_kirthar }
+		position = 11
+		
+		provinces_to_highlight = {
+			AND = {
+				superregion = india_superregion
+				province_has_center_of_trade_of_level = 1
+			}
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				superregion = india_superregion
+				province_has_center_of_trade_of_level = 1
+			}
+		}
+		
+		effect = {
+			add_mercantilism = 5
+			add_estate_loyalty = { estate = estate_burghers loyalty = 10 }
+			add_country_modifier = {
+				name = sel_wealth
+				duration = -1
+			}
+		}
+	}
+	
+	seljuk_great_sultan = {
+		icon = mission_indian_empire
+		required_missions = { seljuk_ganges seljuk_westindia }
+		position = 13
+		
+		provinces_to_highlight = {
+			superregion = india_superregion
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			lower_doab_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+			num_of_owned_provinces_with = {
+				value = 125
+				superregion = india_superregion
+			}
+			num_of_owned_provinces_with = {
+				value = 50
+				religion = ROOT
+				superregion = india_superregion
+			}
+		}
+		
+		effect = {
+			country_event = { id = ab_seljuk.3 }
+		}
+	}
+	
+	seljuk_sipahi = {
+	    icon = mission_conquer_maharashtra
+		required_missions = { seljuk_devshirme seljuk_janissary }
+		position = 15
+		
+		trigger = {
+			num_of_cavalry = 10
+			advisor = dragoon
+		}
+		
+		effect = {
+			custom_tooltip = SEL_CAVALRY
+			add_country_modifier = {
+				name = "seljuk_sipahi"
+				duration = -1
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						num_of_cavalry = 10
+						NOT = {
+							num_of_cavalry = 11
+						}
+					}
+					add_mil_power = 50
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 11
+						NOT = {
+							num_of_cavalry = 12
+						}
+					}
+					add_mil_power = 55
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 12
+						NOT = {
+							num_of_cavalry = 13
+						}
+					}
+					add_mil_power = 60
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 13
+						NOT = {
+							num_of_cavalry = 14
+						}
+					}
+					add_mil_power = 65
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 14
+						NOT = {
+							num_of_cavalry = 15
+						}
+					}
+					add_mil_power = 70
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 15
+						NOT = {
+							num_of_cavalry = 16
+						}
+					}
+					add_mil_power = 75
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 16
+						NOT = {
+							num_of_cavalry = 17
+						}
+					}
+					add_mil_power = 80
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 17
+						NOT = {
+							num_of_cavalry = 18
+						}
+					}
+					add_mil_power = 85
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 18
+						NOT = {
+							num_of_cavalry = 19
+						}
+					}
+					add_mil_power = 90
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 19
+						NOT = {
+							num_of_cavalry = 20
+						}
+					}
+					add_mil_power = 95
+				}
+				else_if = {
+					limit = {
+						num_of_cavalry = 20
+					}
+					add_mil_power = 100
+				}
+			}
+		}
+	}
+	
+	seljuk_pride = {
+	    icon = mission_persian_soldiers
+		required_missions = { seljuk_gunpowder seljuk_sipahi seljuk_discipline }
+		position = 17
+		
+		trigger = {
+			army_professionalism = 0.75
+			army_size = 200
+			has_global_modifier_value = {
+				which = discipline
+				value = 0.15
+			}
+		}
+		
+		effect = {
+			create_general = { tradition = 100 }
+			add_country_modifier = {
+				name = "seljuk_veteran"
+				duration = -1
+			}
+		}
+	}	
+	
+}
+
+sel_fifth = {
+	slot = 5 #upper left column
+	generic = no #if a mission without generic = yes wants this slot then it overrides this.
+	ai = yes
+	potential = {
+		tag = SEL
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	seljuk_saruk = {
+		icon = mission_crusade_for_varna
+		required_missions = { }
+		position = 1
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4302
+				province_id = 331
+				province_id = 4303
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		trigger = {
+			4302 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			331 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4303 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "sel_expand"
+				duration = 9125
+			}
+			samtskhe_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			imereti_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			kartli_kakheti_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			armenia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_georgia = {
+	    icon = mission_georgia
+		required_missions = { seljuk_saruk }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				area = kartli_kakheti_area
+				area = imereti_area
+				area = samtskhe_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			kartli_kakheti_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			imereti_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			samtskhe_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_base_production = 2
+			}
+			add_country_modifier = {
+				name = "sel_looting"
+				duration = 7300
+			}
+			shirvan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			tabriz_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_frontier = {
+	    icon = mission_unite_home_region
+		required_missions = { seljuk_georgia }
+		position = 3
+		
+		provinces_to_highlight = {
+			OR = {
+				area = shirvan_area
+				area = tabriz_area
+				area = armenia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			shirvan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			armenia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tabriz_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_prestige = 15
+			add_country_modifier = {
+				name = "sel_reinforcements"
+				duration = 7300
+			}
+			tabarestan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			azerbaijan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			iraq_e_ajam_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			isfahan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_persia = {
+	    icon = mission_abu_saids_dream
+		required_missions = { seljuk_frontier seljuk_basra }
+		position = 5
+		
+		provinces_to_highlight = {
+			OR = {
+				area = isfahan_area
+				area = iraq_e_ajam_area
+				area = azerbaijan_area
+				area = tabarestan_area
+				area = shahrizor_area
+				area = luristan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			isfahan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			iraq_e_ajam_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			azerbaijan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tabarestan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			shahrizor_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			luristan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_army_tradition = 20
+			add_country_modifier = {
+				name = "sel_persia"
+				duration = 9125
+			}
+			farsistan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			persian_gulf_coast = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_persepolis = {
+	    icon = mission_unite_rajputana
+		required_missions = { seljuk_persia }
+		position = 7
+		
+		provinces_to_highlight = {
+			OR = {
+				area = farsistan_area
+				area = persian_gulf_coast
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			farsistan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			persian_gulf_coast = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			2218 = {
+				add_devastation = 75
+			}
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 20
+			}
+			add_country_modifier = {
+				name = seljuk_persepolis
+				duration = 9125
+			}
+			persia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_iran = {
+	    icon = mission_conquer_persia
+		required_missions = { seljuk_persepolis }
+		position = 7
+		
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			country_event = { id = ab_seljuk.6 }
+		}
+	}
+	
+	seljuk_fate = {
+	    icon = mission_persianate_empire
+		required_missions = { seljuk_iran }
+		position = 8
+		
+		provinces_to_highlight = {
+			region = persia_region
+			OR = {
+				local_autonomy_above_min = 10
+				nationalism = 1
+			}
+		}
+		
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_subject_holds = ROOT
+				NOT = { local_autonomy_above_min = 10 }
+				NOT = { nationalism = 1 }
+			}
+			OR = {
+				num_of_owned_provinces_with = {
+					value = 15
+					region = persia_region
+					OR = {
+						culture = turkish
+						culture = turkish_new
+					}
+				}
+				accepted_culture = persian
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SEL_PERSIA_1
+			tooltip = {
+				add_country_modifier = {
+					name = seljuk_turkification
+					duration = -1
+				}
+			}
+			custom_tooltip = SEL_PERSIA_2
+			tooltip = {
+				add_dip_power = 200
+				add_country_modifier = {
+					name = seljuk_preserve
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						num_of_owned_provinces_with = {
+							value = 15
+							region = persia_region
+							OR = {
+								culture = turkish
+								culture = turkish_new
+							}
+						}
+					}
+					every_owned_province = {
+						limit = {
+							region = persia_region
+							OR = {
+								culture = turkish
+								culture = turkish_new
+							}
+						}
+						add_base_manpower = 2
+					}
+					add_country_modifier = {
+						name = seljuk_turkification
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						accepted_culture = persian
+					}
+					add_dip_power = 200
+					add_country_modifier = {
+						name = seljuk_preserve
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	
+	seljuk_kashmir = {
+	    icon = mission_che_the_cave_country
+		required_missions = { seljuk_kirthar }
+		position = 11
+		
+		provinces_to_highlight = {
+			OR = {
+				area = kashmir_area
+				area = sind_sagar_area
+				area = lahore_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			kashmir_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sind_sagar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lahore_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = seljuk_center
+				duration = -1
+			}
+			sirhind_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+			upper_doab_area  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_ganges = {
+	    icon = mission_control_the_ganges_delta
+		required_missions = { seljuk_kashmir }
+		position = 12
+		
+		provinces_to_highlight = {
+			OR = {
+				area = sirhind_area
+				area = upper_doab_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			sirhind_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_doab_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_mil_power = 150
+			custom_tooltip = SEL_EXHAUST
+			add_country_modifier = {
+				name = seljuk_shatter
+				duration = 9125
+			}
+			hidden_effect = {
+				add_war_exhaustion = -21
+			}
+			hindusthan_region  = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	seljuk_devshirme = {
+	    icon = mission_levantine_restoration
+		required_missions = { }
+		position = 14
+		
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_dhimmi
+				}
+				num_of_estate_privileges = {
+					estate = estate_dhimmi
+					value = 3
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = seljuk_devshirme_system
+				has_country_modifier = the_devshirme_system
+			}
+			num_of_owned_provinces_with = {
+				NOT = {
+					religion = ROOT
+				}
+				value = 10
+			}
+		}
+		
+		effect = {
+			add_estate_loyalty = {
+				estate = estate_dhimmi
+				loyalty = 10
+			}
+			custom_tooltip = SEL_DEVSHIRME
+			add_country_modifier = {
+				name = seljuk_expansion
+				duration = 7300
+			}
+			hidden_effect = {
+                for = {
+                    amount = 5
+                    effect = "
+                        random_owned_province = {
+							limit = {
+								NOT = {
+									religion_group = muslim
+								}
+							}
+							add_base_manpower = 2
+                        }
+                    "
+                }
+			}
+		}
+	}
+	
+	seljuk_gunpowder = {
+	    icon = mission_mnd_siam_revolution
+		required_missions = { seljuk_sipahi }
+		position = 16
+		
+		trigger = {
+			num_of_artillery = 10
+			army_tradition = 50
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "seljuk_artillery"
+				duration = 9125
+			}
+			define_advisor = {
+				type = siegeengineer
+				skill = 2
+				religion = ROOT
+				culture = ROOT
+				cost_multiplier = 0.5
+			}
+		}
+	}
+}

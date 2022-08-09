@@ -1,0 +1,43 @@
+namespace = ab_age
+normal_or_historical_nations = yes
+
+
+country_event = {
+	id = ab_age.1
+	title = ab_age.1.t
+	desc = ab_age.1.d
+	
+	hidden = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = has_had_force_march
+		has_country_flag = has_new_force_march
+	}
+	
+	option = {
+		name = ab_age.1.a
+		add_splendor = 400
+	}
+}
+
+country_event = {
+	id = ab_age.2
+	title = ab_age.2.t
+	desc = ab_age.2.d
+	
+	hidden = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = has_had_conquest
+		has_country_flag = has_new_conquest
+	}
+	
+	option = {
+		name = ab_age.2.a
+		add_splendor = 400
+	}
+}

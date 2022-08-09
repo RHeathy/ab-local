@@ -1,0 +1,17 @@
+namespace = ab_jerusalem
+normal_or_historical_nations = yes
+
+
+country_event = {
+	id = ab_jerusalem.1
+	title = ab_jerusalem.1.t
+	desc = ab_jerusalem.1.d
+	picture = AB_BYZANTIUM_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ab_jerusalem.1.a
+		set_government_rank = 3
+	}
+}

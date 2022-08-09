@@ -1,0 +1,19 @@
+# This is a culture that does not exist anywhere in the game
+# its purpose is to define dynasty names because `set_dynasty`
+# needs it to be defined anywhere for it to work. 
+reserved_dynasty_names = {
+	dynasty_names = {
+		# In short doing `set_dynasty = "Penndraigh"` is not enough
+		# if "Penndraigh" is not defined in `dynasty_names = { }`
+		#
+		# While this is not a problem for normal dynasties that are
+		# defined, the `Penndraigh` dynasty is an special dynasty
+		# that should only appear when a mission is completed.
+		#
+		# So it must **NOT** be in the dynasty_names for Welsh as
+		# there is a chance the dynasty will randomly spawn when
+		# a random noble takes power, a heir is introduced, or
+		# a pretender rebel of welsh culture spawns.
+		Penndraigh
+	}
+}
